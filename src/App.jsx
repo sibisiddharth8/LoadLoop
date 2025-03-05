@@ -19,14 +19,14 @@ function App() {
 
       <div className="min-h-screen bg-gray-900 text-green-300 font-mono p-4 sm:p-6 md:p-8">
         <Routes>
-          <Route
+          {/* <Route
             path="/login"
             element={<Login setIsAuthenticated={setIsAuthenticated} />}
-          />
+          /> */}
           <Route
             path="/*"
             element={
-              <ProtectedRoute isAuthenticated={isAuthenticated}>
+              <ProtectedRoute isAuthenticated={true}>
                 <LoadTester />
               </ProtectedRoute>
             }

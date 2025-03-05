@@ -100,7 +100,7 @@ function LoadTester() {
   return (
     <div className="space-y-8">
       {/* Header with Logout Button */}
-      <div className="flex justify-end">
+      {/* <div className="flex justify-end">
         <button
           onClick={navigateLogout}
           className="flex items-center text-red-500 hover:text-red-400 focus:outline-none focus:ring focus:ring-red-500"
@@ -108,7 +108,7 @@ function LoadTester() {
           <FaSignOutAlt className="mr-2" />
           Logout
         </button>
-      </div>
+      </div> */}
       <ConfigForm
         baseUrl={baseUrl}
         setBaseUrl={setBaseUrl}
