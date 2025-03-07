@@ -15,17 +15,39 @@ function LoadTester() {
   const [loading, setLoading] = useState(false);
   const abortControllerRef = useRef(null);
 
-  const navigateLogout = () => {
-    // Clear the authentication flag and redirect to login.
-    localStorage.removeItem('isAuthenticated');
-    navigate('/login', { replace: true });
-  };
-
   const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
+  // Updated generateHeavyPayload function with nested, complex data structures.
   const generateHeavyPayload = (size) => ({
     task: 'heavyCompute',
-    payload: Array.from({ length: size }, () => Math.random()),
+    payload: {
+      data: Array.from({ length: size }, () => Math.random()),
+      meta: {
+        timestamp: Date.now(),
+        description: "Complex payload structure for heavy computation",
+        // Create a nested array whose length is a fraction of the payload size.
+        nestedData: Array.from({ length: Math.floor(size / 1000) }, () => ({
+          value: Math.random(),
+          details: {
+            a: Math.random(),
+            b: Math.random(),
+            c: Math.random(),
+          },
+        })),
+      },
+    },
+    additional: {
+      operation: "simulateComputation",
+      complexity: Math.random(),
+      parameters: {
+        param1: Array.from({ length: 100 }, () => Math.random()),
+        param2: Array.from({ length: 50 }, () => ({
+          x: Math.random(),
+          y: Math.random(),
+          z: Math.random(),
+        })),
+      },
+    },
   });
 
   const sendHeavyLoadRequests = async () => {
@@ -99,16 +121,6 @@ function LoadTester() {
 
   return (
     <div className="space-y-8">
-      {/* Header with Logout Button */}
-      {/* <div className="flex justify-end">
-        <button
-          onClick={navigateLogout}
-          className="flex items-center text-red-500 hover:text-red-400 focus:outline-none focus:ring focus:ring-red-500"
-        >
-          <FaSignOutAlt className="mr-2" />
-          Logout
-        </button>
-      </div> */}
       <ConfigForm
         baseUrl={baseUrl}
         setBaseUrl={setBaseUrl}
